@@ -1,0 +1,13 @@
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\bin\Debug\net8.0\Monogame.ImGuiNet.deps.json
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\bin\Debug\net8.0\Monogame.ImGuiNet.dll
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\bin\Debug\net8.0\Monogame.ImGuiNet.pdb
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.csproj.AssemblyReference.cache
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.AssemblyInfoInputs.cache
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.AssemblyInfo.cs
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.csproj.CoreCompileInputs.cache
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.sourcelink.json
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.dll
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\refint\Monogame.ImGuiNet.dll
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\Monogame.ImGuiNet.pdb
+C:\Users\Nicholas\Desktop\C#\FizzleMonogameTemplate\MonoGame.ImGuiNet\obj\Debug\net8.0\ref\Monogame.ImGuiNet.dll
