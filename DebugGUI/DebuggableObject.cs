@@ -11,7 +11,6 @@ public abstract class DebuggableObject : IDebuggable
     {
         return DebuggableHelper.GetDebugProperties(this);
     }
-
     private void AddDebugProperties(IEnumerable<MemberInfo> members)
     {
         foreach (var member in members)

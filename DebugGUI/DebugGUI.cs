@@ -24,30 +24,14 @@ public static class DebugGUI<TGame> where TGame : Game
 
         foreach (var (name, debuggable) in debuggableObjects)
         {
-            // Instead of creating a collapsing header for each debuggable object,
-            // directly render its properties
-            DebugRenderer.RenderDebugProperties(debuggable.GetDebugProperties());
+            if (ImGui.CollapsingHeader(name))
+            {
+                DebugRenderer.RenderDebugProperties(debuggable.GetDebugProperties());
+            }
         }
 
         ImGui.End();
 
         GuiRenderer.EndLayout();
     }
-    private static void DrawDebugMenus()
-    {
-        ImGui.Begin("Debug Menus");
-
-        ImGui.Text($"FPS: {1 / ImGui.GetIO().DeltaTime:F2}");
-
-        foreach (var (name, debuggable) in debuggableObjects)
-        {
-            if (ImGui.CollapsingHeader(name))
-            {
-                DebugRenderer.CreateDebugMenu(name, debuggable);
-            }
-        }
-
-        ImGui.End();
-    }
-
 }

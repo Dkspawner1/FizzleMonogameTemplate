@@ -25,7 +25,7 @@ public class Game1 : Game, IDebuggable
     [DebugVariable]
     private Color backgroundColor = Color.DeepPink;
 
-
+    public List<DebugProperty> GetDebugProperties() => DebuggableHelper.GetDebugProperties(this);
 
     public Game1()
     {
