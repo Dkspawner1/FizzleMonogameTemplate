@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/dorll/Desktop/c#/FizzleGame/FizzleGame.csproj": {}
+  },
+  "projects": {
+    "/home/dorll/Desktop/c#/FizzleGame/FizzleGame.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/dorll/Desktop/c#/FizzleGame/FizzleGame.csproj",
+        "projectName": "FizzleGame",
+        "projectPath": "/home/dorll/Desktop/c#/FizzleGame/FizzleGame.csproj",
+        "packagesPath": "/home/dorll/.nuget/packages/",
+        "outputPath": "/home/dorll/Desktop/c#/FizzleGame/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/dorll/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "MonoGame.Content.Builder.Task": {
+              "target": "Package",
+              "version": "[3.8.2.1105, )"
+            },
+            "MonoGame.Extended": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "MonoGame.Framework.DesktopGL": {
+              "target": "Package",
+              "version": "[3.8.2.1105, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
