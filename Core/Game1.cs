@@ -1,19 +1,15 @@
-namespace FizzleGame.Core;
 
 using System.Diagnostics;
 using FizzleGame.Singletons.Classes;
 using FizzleGame.Managers;
-using static FizzleGame.Core.Data;
 using System;
 using FizzleMonogameTemplate.DebugGUI;
 using System.Collections.Generic;
-using System.Reflection;
 
-
+namespace FizzleGame.Core;
 public class Game1 : Game, IDebuggable
 {
     private readonly SceneManager sceneManager;
-
 
     // Test debug variables
     [DebugVariable]
@@ -24,19 +20,17 @@ public class Game1 : Game, IDebuggable
     private Vector2 playerPosition = new Vector2(100, 100);
     [DebugVariable]
     private Color backgroundColor = Color.DeepPink;
-
     public List<DebugProperty> GetDebugProperties() => DebuggableHelper.GetDebugProperties(this);
 
     public Game1()
     {
-
         _ = new GraphicsDeviceManager(this)
         {
-            PreferredBackBufferWidth = window.Width,
-            PreferredBackBufferHeight = window.Height
+            PreferredBackBufferWidth = Data.Window.Width,
+            PreferredBackBufferHeight = Data.Window.Height
         };
 
-        Window.Title = window.Title;
+        Window.Title = Data.Window.Title;
         Window.AllowUserResizing = true;
         Window.AllowAltF4 = true;
         Window.ClientSizeChanged += WindowClientSizeChanged;
@@ -64,6 +58,8 @@ public class Game1 : Game, IDebuggable
         DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
         base.Initialize();
+        Console.WriteLine($"{Services}");
+
     }
 
     protected override void LoadContent()
@@ -72,17 +68,18 @@ public class Game1 : Game, IDebuggable
         pixel = new Texture2D(GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
         sceneManager.LoadContent();
+
         DebugGUI<Game1>.LoadContent();
 
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (window.Exit)
+        if (Data.Window.Exit)
             Exit();
         sceneManager.Update(gameTime);
 
-        // Use _gameSpeed to adjust update speed
+        // Use gameSpeed to adjust update speed
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds * gameSpeed;
 
         // Update player position (example)
@@ -92,10 +89,10 @@ public class Game1 : Game, IDebuggable
         if (keyState.IsKeyDown(Keys.A)) playerPosition.X -= 100 * deltaTime;
         if (keyState.IsKeyDown(Keys.D)) playerPosition.X += 100 * deltaTime;
 
+
         base.Update(gameTime);
     }
     private Texture2D pixel;
-
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(backgroundColor);
@@ -103,10 +100,8 @@ public class Game1 : Game, IDebuggable
         sceneManager.Draw(gameTime);
 
         // Draw a rectangle representing the player
-
         SpriteBatchSingleton.Instance.SpriteBatch.Begin();
         SpriteBatchSingleton.Instance.SpriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
-
         SpriteBatchSingleton.Instance.SpriteBatch.End();
 
         DebugGUI<Game1>.Draw(gameTime);

@@ -19,17 +19,9 @@ public static class DebugRenderer
         { typeof(int), HandleIntProperty },
         { typeof(bool), HandleBoolProperty },
         { typeof(string), HandleStringProperty },
-        { typeof(Vector2), HandleVector2Property },
-        { typeof(Vector3), HandleVector3Property },
-        { typeof(Color), HandleColorProperty }
-    };
-
-    public static Action<string, IDebuggable> CreateDebugMenu = (menuName, debuggable) =>
-    {
-        if (ImGui.CollapsingHeader(menuName))
-        {
-            RenderDebugProperties(debuggable.GetDebugProperties());
-        }
+        { typeof(XnaVector2), HandleVector2Property },
+        { typeof(XnaVector3), HandleVector3Property },
+        { typeof(XnaColor), HandleColorProperty }
     };
 
     public static void RenderDebugProperties(List<DebugProperty> properties)

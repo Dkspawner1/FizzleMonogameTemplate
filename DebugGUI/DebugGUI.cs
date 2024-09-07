@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using ImGuiNET;
 using MonoGame.ImGuiNet;
 namespace FizzleMonogameTemplate.DebugGUI;
-public static class DebugGUI<TGame> where TGame : Game
+
+public static class DebugGUI<TGame> where TGame : Game, IDebuggable
 {
 
+#pragma warning disable CS0436 // Type conflicts with imported type
     public static ImGuiRenderer GuiRenderer { get; private set; }
-    private static List<(string Name, IDebuggable Object)> debuggableObjects = [];
+#pragma warning restore CS0436 // Type conflicts with imported type
+
+    private static readonly List<(string Name, IDebuggable Object)> debuggableObjects = [];
     public static void Initialize(TGame game) => GuiRenderer = new(game);
 
     public static void LoadContent() => GuiRenderer.RebuildFontAtlas();
@@ -37,12 +41,8 @@ public static class DebugGUI<TGame> where TGame : Game
             ImGui.Text($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds:F2}");
 
             foreach (var (name, debuggable) in debuggableObjects)
-            {
                 if (ImGui.CollapsingHeader(name))
-                {
                     DebugRenderer.RenderDebugProperties(debuggable.GetDebugProperties());
-                }
-            }
 
             ImGui.End();
         }

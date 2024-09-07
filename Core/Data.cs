@@ -14,7 +14,7 @@ public static class Data
 
 
     public record GameSettings { };
-    public static WindowSettings window = new();
+    public static WindowSettings Window = new();
 
 
 }
