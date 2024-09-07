@@ -7,6 +7,8 @@ using static FizzleGame.Core.Data;
 using System;
 using FizzleMonogameTemplate.DebugGUI;
 using System.Collections.Generic;
+using System.Reflection;
+
 
 public class Game1 : Game, IDebuggable
 {
@@ -21,17 +23,10 @@ public class Game1 : Game, IDebuggable
     [DebugVariable]
     private Vector2 playerPosition = new Vector2(100, 100);
     [DebugVariable]
-    private Color backgroundColor = Color.CornflowerBlue;
-    public List<DebugProperty> GetDebugProperties()
-    {
-        return new List<DebugProperty>
-        {
-            new DebugProperty("Game Speed", typeof(float), () => gameSpeed, value => gameSpeed = (float)value),
-            new DebugProperty("Debug Mode", typeof(bool), () => debugMode, value => debugMode = (bool)value),
-            new DebugProperty("Player Position", typeof(Vector2), () => playerPosition, value => playerPosition = (Vector2)value),
-            new DebugProperty("Background Color", typeof(Color), () => backgroundColor, value => backgroundColor = (Color)value)
-        };
-    }
+    private Color backgroundColor = Color.DeepPink;
+
+
+
     public Game1()
     {
 
@@ -103,7 +98,7 @@ public class Game1 : Game, IDebuggable
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.DeepPink);
+        GraphicsDevice.Clear(backgroundColor);
 
         sceneManager.Draw(gameTime);
 
@@ -114,6 +109,7 @@ public class Game1 : Game, IDebuggable
 
         SpriteBatchSingleton.Instance.SpriteBatch.End();
 
+        DebugGUI<Game1>.Draw(gameTime);
 
 
         base.Draw(gameTime);

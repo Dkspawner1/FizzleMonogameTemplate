@@ -19,20 +19,17 @@ public static class DebugGUI<TGame> where TGame : Game
     {
         GuiRenderer.BeginLayout(gameTime);
 
-        if (ImGui.BeginMainMenuBar())
+        ImGui.Begin("Debug Menu");
+        ImGui.Text($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds:F2}");
+
+        foreach (var (name, debuggable) in debuggableObjects)
         {
-            if (ImGui.BeginMenu("Debug"))
-            {
-                ImGui.MenuItem("Show Debug Window", "", ref toolActive);
-                ImGui.EndMenu();
-            }
-            ImGui.EndMainMenuBar();
+            // Instead of creating a collapsing header for each debuggable object,
+            // directly render its properties
+            DebugRenderer.RenderDebugProperties(debuggable.GetDebugProperties());
         }
 
-        if (toolActive)
-        {
-            DrawDebugMenus();
-        }
+        ImGui.End();
 
         GuiRenderer.EndLayout();
     }

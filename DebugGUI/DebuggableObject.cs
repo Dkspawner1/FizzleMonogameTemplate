@@ -9,37 +9,7 @@ public abstract class DebuggableObject : IDebuggable
 
     public List<DebugProperty> GetDebugProperties()
     {
-        var properties = new List<DebugProperty>();
-
-        // Get both fields and properties
-        var members = GetType().GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-        foreach (var member in members)
-        {
-            if (member.GetCustomAttribute<DebugVariableAttribute>() != null)
-            {
-                if (member is PropertyInfo property)
-                {
-                    properties.Add(new DebugProperty(
-                        property.Name,
-                        property.PropertyType,
-                        () => property.GetValue(this),
-                        value => property.SetValue(this, value)
-                    ));
-                }
-                else if (member is FieldInfo field)
-                {
-                    properties.Add(new DebugProperty(
-                        field.Name,
-                        field.FieldType,
-                        () => field.GetValue(this),
-                        value => field.SetValue(this, value)
-                    ));
-                }
-            }
-        }
-
-        return properties;
+        return DebuggableHelper.GetDebugProperties(this);
     }
 
     private void AddDebugProperties(IEnumerable<MemberInfo> members)
