@@ -1,17 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "3FvQAeyIpxlgyp3WwuyKBPy1j5uXn/VH3r6u2zkuHpPRphH1HpA4qUu/1gQcwqQ6tgiHQN1HQnrV43pPK2pobQ==",
+  "dgSpecHash": "6ogP4Les0JA=",
   "success": true,
-  "projectFilePath": "/home/dorll/Desktop/c#/FizzleGame/FizzleGame.csproj",
+  "projectFilePath": "c:\\Users\\Nicholas\\Desktop\\C#\\FizzleEndlessRunner\\FizzleMonogameTemplate\\FizzleGame.csproj",
   "expectedPackageFiles": [
-    "/home/dorll/.nuget/packages/monogame.content.builder.task/3.8.2.1105/monogame.content.builder.task.3.8.2.1105.nupkg.sha512",
-    "/home/dorll/.nuget/packages/monogame.extended/4.0.2/monogame.extended.4.0.2.nupkg.sha512",
-    "/home/dorll/.nuget/packages/monogame.framework.desktopgl/3.8.2.1105/monogame.framework.desktopgl.3.8.2.1105.nupkg.sha512",
-    "/home/dorll/.nuget/packages/monogame.library.sdl/2.26.5.5/monogame.library.sdl.2.26.5.5.nupkg.sha512",
-    "/home/dorll/.nuget/packages/nvorbis/0.10.4/nvorbis.0.10.4.nupkg.sha512",
-    "/home/dorll/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
-    "/home/dorll/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
-    "/home/dorll/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.7/microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
+    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.content.builder.task\\3.8.2.1105\\monogame.content.builder.task.3.8.2.1105.nupkg.sha512",
+    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.extended\\4.0.2\\monogame.extended.4.0.2.nupkg.sha512",
+    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.2.1105\\monogame.framework.desktopgl.3.8.2.1105.nupkg.sha512",
+    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.library.sdl\\2.26.5.5\\monogame.library.sdl.2.26.5.5.nupkg.sha512",
+    "C:\\Users\\Nicholas\\.nuget\\packages\\nvorbis\\0.10.4\\nvorbis.0.10.4.nupkg.sha512",
+    "C:\\Users\\Nicholas\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Nicholas\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

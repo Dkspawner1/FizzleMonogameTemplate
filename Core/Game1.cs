@@ -30,8 +30,11 @@ public class Game1 : Game
         sceneManager = new();
     }
 
-    private void WindowClientSizeChanged(object sender, EventArgs e) => ScreenManager.UpdateScreenSize(SpriteBatchSingleton.Instance.SpriteBatch.GraphicsDevice);
-
+    private void WindowClientSizeChanged(object sender, EventArgs e)
+    {
+        ScreenManager.UpdateScreenSize(SpriteBatchSingleton.Instance.SpriteBatch.GraphicsDevice);
+        Trace.WriteLine($"Screen's new size: {GraphicsDevice.Viewport.Bounds} Updated to ScreenManager: {ScreenManager.ScreenSize}");
+    }
     protected override void Initialize()
     {
         ScreenManager.Initialize(GraphicsDevice);
