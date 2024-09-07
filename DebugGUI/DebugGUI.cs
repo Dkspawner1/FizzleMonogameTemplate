@@ -11,7 +11,7 @@ public static class DebugGUI<TGame> where TGame : Game
     public static void Initialize(TGame game) => GuiRenderer = new(game);
 
     public static void LoadContent() => GuiRenderer.RebuildFontAtlas();
-    private static bool toolActive = true;
+    private static bool showDebugWindow = true;
 
     public static void RegisterDebuggable(string name, IDebuggable debuggable) => debuggableObjects.Add((name, debuggable));
     public static void UnregisterDebuggable(string name) => debuggableObjects.RemoveAll(item => item.Name == name);
@@ -19,18 +19,33 @@ public static class DebugGUI<TGame> where TGame : Game
     {
         GuiRenderer.BeginLayout(gameTime);
 
-        ImGui.Begin("Debug Menu");
-        ImGui.Text($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds:F2}");
-
-        foreach (var (name, debuggable) in debuggableObjects)
+        // Add the menu bar
+        if (ImGui.BeginMainMenuBar())
         {
-            if (ImGui.CollapsingHeader(name))
+            if (ImGui.BeginMenu("Debug"))
             {
-                DebugRenderer.RenderDebugProperties(debuggable.GetDebugProperties());
+                ImGui.MenuItem("Show Debug Window", "", ref showDebugWindow);
+                ImGui.EndMenu();
             }
+            ImGui.EndMainMenuBar();
         }
 
-        ImGui.End();
+        // Only show the debug window if toggled on
+        if (showDebugWindow)
+        {
+            ImGui.Begin("Debug Menu");
+            ImGui.Text($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds:F2}");
+
+            foreach (var (name, debuggable) in debuggableObjects)
+            {
+                if (ImGui.CollapsingHeader(name))
+                {
+                    DebugRenderer.RenderDebugProperties(debuggable.GetDebugProperties());
+                }
+            }
+
+            ImGui.End();
+        }
 
         GuiRenderer.EndLayout();
     }
