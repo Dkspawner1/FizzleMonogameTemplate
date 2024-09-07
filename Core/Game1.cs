@@ -24,11 +24,13 @@ public class Game1 : Game, IDebuggable
 
     public Game1()
     {
-        _ = new GraphicsDeviceManager(this)
+        var graphicsDeviceManager = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = Data.Window.Width,
             PreferredBackBufferHeight = Data.Window.Height
         };
+
+        ServiceLocator.RegisterService(graphicsDeviceManager);
 
         Window.Title = Data.Window.Title;
         Window.AllowUserResizing = true;
@@ -48,19 +50,27 @@ public class Game1 : Game, IDebuggable
     }
     protected override void Initialize()
     {
-        ServiceLocator.RegisterService(GraphicsDevice);
-        ServiceLocator.RegisterService(Content);
-        ServiceLocator.RegisterService(new SpriteBatch(GraphicsDevice));
-        ServiceLocator.RegisterService(new SceneManager());
+        try
+        {
+            ServiceLocator.RegisterService(GraphicsDevice);
+            ServiceLocator.RegisterService(Content);
+            ServiceLocator.RegisterService(new SpriteBatch(GraphicsDevice));
+            ServiceLocator.RegisterService(sceneManager);
 
-        ScreenManager.Initialize(GraphicsDevice);
-        sceneManager.Initialize();
+            ScreenManager.Initialize(GraphicsDevice);
+            sceneManager.Initialize();
 
-        DebugGUI<Game1>.Initialize(this);
-        DebugGUI<Game1>.RegisterDebuggable("Game", this);
+            DebugGUI<Game1>.Initialize(this);
+            DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
-        base.Initialize();
-
+            base.Initialize();
+        }
+        catch (Exception ex)
+        {
+            // Log the exception or handle it appropriately
+            Console.WriteLine($"Error during initialization: {ex.Message}");
+            throw;
+        }
     }
 
     protected override void LoadContent()
