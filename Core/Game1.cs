@@ -1,10 +1,10 @@
 
 using System.Diagnostics;
-using FizzleGame.Singletons.Classes;
 using FizzleGame.Managers;
 using System;
 using FizzleMonogameTemplate.DebugGUI;
 using System.Collections.Generic;
+using FizzleMonogameTemplate.Services;
 
 namespace FizzleGame.Core;
 public class Game1 : Game, IDebuggable
@@ -43,22 +43,23 @@ public class Game1 : Game, IDebuggable
 
     private void WindowClientSizeChanged(object sender, EventArgs e)
     {
-        ScreenManager.UpdateScreenSize(SpriteBatchSingleton.Instance.SpriteBatch.GraphicsDevice);
+        ScreenManager.UpdateScreenSize(ServiceLocator.GetService<GraphicsDevice>());
         Trace.WriteLine($"Screen's new size: {GraphicsDevice.Viewport.Bounds} Updated to ScreenManager: {ScreenManager.ScreenSize}");
     }
     protected override void Initialize()
     {
-        ScreenManager.Initialize(GraphicsDevice);
-        ContentLoaderSingleton.Initialize(Content);
-        SpriteBatchSingleton.Initialize(GraphicsDevice);
+        ServiceLocator.RegisterService(GraphicsDevice);
+        ServiceLocator.RegisterService(Content);
+        ServiceLocator.RegisterService(new SpriteBatch(GraphicsDevice));
+        ServiceLocator.RegisterService(new SceneManager());
 
+        ScreenManager.Initialize(GraphicsDevice);
         sceneManager.Initialize();
 
         DebugGUI<Game1>.Initialize(this);
         DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
         base.Initialize();
-        Console.WriteLine($"{Services}");
 
     }
 
@@ -100,9 +101,10 @@ public class Game1 : Game, IDebuggable
         sceneManager.Draw(gameTime);
 
         // Draw a rectangle representing the player
-        SpriteBatchSingleton.Instance.SpriteBatch.Begin();
-        SpriteBatchSingleton.Instance.SpriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
-        SpriteBatchSingleton.Instance.SpriteBatch.End();
+        var spriteBatch = ServiceLocator.GetService<SpriteBatch>();
+        spriteBatch.Begin();
+        spriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
+        spriteBatch.End();
 
         DebugGUI<Game1>.Draw(gameTime);
 

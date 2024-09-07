@@ -1,4 +1,4 @@
-using FizzleGame.Singletons.Classes;
+using FizzleMonogameTemplate.Services;
 using MonoGame.Extended.ECS.Systems;
 using MonoGame.Extended.Graphics;
 
@@ -6,7 +6,7 @@ namespace FizzleGame.ECS.Systems;
 
 public class RenderSystem : EntityDrawSystem
 {
-    private static SpriteBatch spriteBatch => SpriteBatchSingleton.Instance.SpriteBatch;
+    private static SpriteBatch spriteBatch => ServiceLocator.GetService<SpriteBatch>();
     public RenderSystem() : base(Aspect.All(typeof(Sprite)))
     { }
     public override void Initialize(IComponentMapperService mapperService)
