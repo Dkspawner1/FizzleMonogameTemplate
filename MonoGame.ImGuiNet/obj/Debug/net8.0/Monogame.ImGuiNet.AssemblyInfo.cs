@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("\r\n            A superset of ImGuiNet with additional components designed for Mono" +
     "game\r\n        ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.1.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.0+60cc12d6e77fa36f1d0296b40265d7082c5ea2b3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.0+a0f88fcd708c8c43efb565ef8eb67efdb336a671")]
 [assembly: System.Reflection.AssemblyProductAttribute("Monogame.ImGuiNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Monogame.ImGuiNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.1.0.0")]

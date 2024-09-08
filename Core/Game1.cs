@@ -21,14 +21,15 @@ public class Game1 : Game, IDebuggable
     [DebugVariable]
     private Color backgroundColor = Color.DeepPink;
     public List<DebugProperty> GetDebugProperties() => DebuggableHelper.GetDebugProperties(this);
-
     public Game1()
     {
         var graphicsDeviceManager = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = Data.Window.Width,
-            PreferredBackBufferHeight = Data.Window.Height
+            PreferredBackBufferHeight = Data.Window.Height,
+            SynchronizeWithVerticalRetrace = true,
         };
+        IsFixedTimeStep = true;
 
         ServiceLocator.RegisterService(graphicsDeviceManager);
 
@@ -48,7 +49,7 @@ public class Game1 : Game, IDebuggable
         ScreenManager.UpdateScreenSize(ServiceLocator.GetService<GraphicsDevice>());
         Trace.WriteLine($"Screen's new size: {GraphicsDevice.Viewport.Bounds} Updated to ScreenManager: {ScreenManager.ScreenSize}");
     }
-     protected override void Initialize()
+    protected override void Initialize()
     {
         try
         {
