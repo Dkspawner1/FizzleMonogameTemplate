@@ -10,13 +10,17 @@ namespace FizzleMonogameTemplate.DebugGUI;
 
 public static class DebugGUI<Debuggable>
 {
-    #pragma warning disable CS0436 // Type conflicts with imported type
+#pragma warning disable CS0436 // Type conflicts with imported type
     public static ImGuiRenderer GuiRenderer { get; private set; }
-    #pragma warning restore CS0436 // Type conflicts with imported type2
-    
+#pragma warning restore CS0436 // Type conflicts with imported type2
+
     private static readonly ConcurrentDictionary<string, IDebuggable> debuggableObjects = new();
+
+    public static void SetDebugWindowSize(ImGuiVector2 size) => debugWindowSize = size;
+    public static void SetDebugWindowPosition(ImGuiVector2 position) => debugWindowPosition = position;
     private static ImGuiVector2 debugWindowSize = new(300, 200);
     private static ImGuiVector2 debugWindowPosition = new(10, 10);
+
     private static bool showDebugWindow = true;
 
     public static void Initialize()
@@ -27,21 +31,18 @@ public static class DebugGUI<Debuggable>
     }
 
     public static void LoadContent() => GuiRenderer.RebuildFontAtlas();
-
+public static void ToggleDebugWindow() => showDebugWindow = !showDebugWindow;
     public static void RegisterDebuggable(string name, IDebuggable debuggable)
     {
         if (string.IsNullOrEmpty(name))
             throw new ArgumentException("Name cannot be null or empty", nameof(name));
         if (debuggable == null)
             throw new ArgumentNullException(nameof(debuggable));
-        
+
         debuggableObjects[name] = debuggable;
     }
 
-    public static void UnregisterDebuggable(string name)
-    {
-        debuggableObjects.TryRemove(name, out _);
-    }
+    public static void UnregisterDebuggable(string name) => debuggableObjects.TryRemove(name, out _);
 
     public static void Draw(in GameTime gameTime)
     {
@@ -66,11 +67,9 @@ public static class DebugGUI<Debuggable>
             ImGui.Begin("Debug Menu");
             ImGui.Text($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds:F2}");
 
-            foreach (var kvp in debuggableObjects)
-            {
-                if (ImGui.CollapsingHeader(kvp.Key))
-                    DebugRenderer.RenderDebugProperties(kvp.Value.GetDebugProperties());
-            }
+            foreach (var debuggable in debuggableObjects)
+                if (ImGui.CollapsingHeader(debuggable.Key))
+                    DebugRenderer.RenderDebugProperties(debuggable.Value.GetDebugProperties());
 
             ImGui.End();
         }

@@ -5,6 +5,7 @@ using System;
 using FizzleMonogameTemplate.DebugGUI;
 using System.Collections.Generic;
 using FizzleMonogameTemplate.Services;
+using ImGuiNET;
 
 namespace FizzleGame.Core;
 public class Game1 : Game, IDebuggable
@@ -20,7 +21,7 @@ public class Game1 : Game, IDebuggable
     private Vector2 playerPosition = new Vector2(100, 100);
     [DebugVariable]
     private Color backgroundColor = Color.DeepPink;
-    public List<DebugProperty> GetDebugProperties() => DebuggableHelper.GetDebugProperties(this);
+    
     public Game1()
     {
         var graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -68,7 +69,6 @@ public class Game1 : Game, IDebuggable
         }
         catch (Exception ex)
         {
-            // Log the exception or handle it appropriately
             Console.WriteLine($"Error during initialization: {ex.Message}");
             throw;
         }
