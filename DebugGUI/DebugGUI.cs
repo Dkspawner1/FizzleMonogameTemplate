@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-
+using FizzleMonogameTemplate.Services;
 using ImGuiNET;
 using MonoGame.ImGuiNet;
 namespace FizzleMonogameTemplate.DebugGUI;
 
-public static class DebugGUI<TGame> where TGame : Game, IDebuggable
+public static class DebugGUI<Debuggable> where Debuggable : IDebuggable
 {
 
 #pragma warning disable CS0436 // Type conflicts with imported type
@@ -12,7 +12,7 @@ public static class DebugGUI<TGame> where TGame : Game, IDebuggable
 #pragma warning restore CS0436 // Type conflicts with imported type
 
     private static readonly List<(string Name, IDebuggable Object)> debuggableObjects = [];
-    public static void Initialize(TGame game) => GuiRenderer = new(game);
+    public static void Initialize() => GuiRenderer = new(ServiceLocator.GetService<Game1>());
 
     public static void LoadContent() => GuiRenderer.RebuildFontAtlas();
     private static bool showDebugWindow = true;

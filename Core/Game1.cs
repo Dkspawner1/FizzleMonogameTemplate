@@ -48,7 +48,7 @@ public class Game1 : Game, IDebuggable
         ScreenManager.UpdateScreenSize(ServiceLocator.GetService<GraphicsDevice>());
         Trace.WriteLine($"Screen's new size: {GraphicsDevice.Viewport.Bounds} Updated to ScreenManager: {ScreenManager.ScreenSize}");
     }
-    protected override void Initialize()
+     protected override void Initialize()
     {
         try
         {
@@ -56,11 +56,11 @@ public class Game1 : Game, IDebuggable
             ServiceLocator.RegisterService(Content);
             ServiceLocator.RegisterService(new SpriteBatch(GraphicsDevice));
             ServiceLocator.RegisterService(sceneManager);
+            ServiceLocator.RegisterService(this);
 
             ScreenManager.Initialize(GraphicsDevice);
             sceneManager.Initialize();
-
-            DebugGUI<Game1>.Initialize(this);
+            DebugGUI<Game1>.Initialize();
             DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
             base.Initialize();
@@ -78,6 +78,7 @@ public class Game1 : Game, IDebuggable
         // Create a 1x1 white texture for drawing shapes
         pixel = new Texture2D(GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
+
         sceneManager.LoadContent();
 
         DebugGUI<Game1>.LoadContent();

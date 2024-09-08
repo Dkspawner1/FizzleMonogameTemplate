@@ -1,40 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\FizzleGame.csproj": {}
+    "/home/dorll/Desktop/c#/FizzleMonogameTemplate/FizzleGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\FizzleGame.csproj": {
+    "/home/dorll/Desktop/c#/FizzleMonogameTemplate/FizzleGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\FizzleGame.csproj",
+        "projectUniqueName": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/FizzleGame.csproj",
         "projectName": "FizzleGame",
-        "projectPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\FizzleGame.csproj",
-        "packagesPath": "C:\\Users\\Nicholas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\obj\\",
+        "projectPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/FizzleGame.csproj",
+        "packagesPath": "/home/dorll/.nuget/packages/",
+        "outputPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Nicholas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/dorll/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {
-                "projectPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj"
+              "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj": {
+                "projectPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj"
               }
             }
           }
@@ -43,11 +36,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -78,38 +66,37 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {
+    "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj": {
       "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+        "projectUniqueName": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj",
         "projectName": "MonoGame.ImGuiNet",
-        "projectPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
-        "packagesPath": "C:\\Users\\Nicholas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\obj\\",
+        "projectPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj",
+        "packagesPath": "/home/dorll/.nuget/packages/",
+        "outputPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Nicholas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/dorll/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -122,11 +109,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -157,12 +139,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.7, 8.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

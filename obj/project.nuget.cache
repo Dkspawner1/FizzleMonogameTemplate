@@ -1,20 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "iu7tMBTSndY=",
+  "dgSpecHash": "C5/JebXsreS365TVad/OCyTd5q95dhdTcKmZWYN1EO3IxPspPda/yucB6cSoIs9sBnZurKiXg5a+LfSRCPEmRA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\FizzleGame.csproj",
+  "projectFilePath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/FizzleGame.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Nicholas\\.nuget\\packages\\imgui.net\\1.90.1.1\\imgui.net.1.90.1.1.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.content.builder.task\\3.8.2.1105\\monogame.content.builder.task.3.8.2.1105.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.extended\\4.0.0\\monogame.extended.4.0.0.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.2.1105\\monogame.framework.desktopgl.3.8.2.1105.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\monogame.library.sdl\\2.26.5.5\\monogame.library.sdl.2.26.5.5.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\nvorbis\\0.10.4\\nvorbis.0.10.4.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
-    "C:\\Users\\Nicholas\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
+    "/home/dorll/.nuget/packages/imgui.net/1.90.1.1/imgui.net.1.90.1.1.nupkg.sha512",
+    "/home/dorll/.nuget/packages/monogame.content.builder.task/3.8.2.1105/monogame.content.builder.task.3.8.2.1105.nupkg.sha512",
+    "/home/dorll/.nuget/packages/monogame.extended/4.0.0/monogame.extended.4.0.0.nupkg.sha512",
+    "/home/dorll/.nuget/packages/monogame.framework.desktopgl/3.8.2.1105/monogame.framework.desktopgl.3.8.2.1105.nupkg.sha512",
+    "/home/dorll/.nuget/packages/monogame.library.sdl/2.26.5.5/monogame.library.sdl.2.26.5.5.nupkg.sha512",
+    "/home/dorll/.nuget/packages/nvorbis/0.10.4/nvorbis.0.10.4.nupkg.sha512",
+    "/home/dorll/.nuget/packages/system.buffers/4.4.0/system.buffers.4.4.0.nupkg.sha512",
+    "/home/dorll/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/home/dorll/.nuget/packages/system.numerics.vectors/4.4.0/system.numerics.vectors.4.4.0.nupkg.sha512",
+    "/home/dorll/.nuget/packages/system.runtime.compilerservices.unsafe/4.4.0/system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
+    "/home/dorll/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
+    "/home/dorll/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.7/microsoft.aspnetcore.app.ref.8.0.7.nupkg.sha512"
   ],
   "logs": []
 }
