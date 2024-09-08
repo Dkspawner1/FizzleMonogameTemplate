@@ -88,8 +88,10 @@ public class Game1 : Game, IDebuggable
 
     protected override void Update(GameTime gameTime)
     {
-        if (Data.Window.Exit)
+        if (Data.Window.Exit){
+                DebugGUI<Game1>.UnregisterDebuggable("Game");
             Exit();
+        }
         sceneManager.Update(gameTime);
 
         // Use gameSpeed to adjust update speed
