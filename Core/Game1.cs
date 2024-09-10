@@ -12,7 +12,7 @@ public class Game1 : Game, IDebuggable
     private readonly SceneManager sceneManager;
 
     // Test debug variables
-    [DebugVariable]
+    [DebugVariable(true)]
     private float gameSpeed = 1.0f;
     [DebugVariable]
     private bool debugMode = true;
