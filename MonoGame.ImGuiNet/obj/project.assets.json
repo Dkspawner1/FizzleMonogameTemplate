@@ -286,24 +286,32 @@
     ]
   },
   "packageFolders": {
-    "/home/dorll/.nuget/packages/": {}
+    "C:\\Users\\Nicholas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.1.0",
     "restore": {
-      "projectUniqueName": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj",
+      "projectUniqueName": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
       "projectName": "MonoGame.ImGuiNet",
-      "projectPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/Monogame.ImGuiNet.csproj",
-      "packagesPath": "/home/dorll/.nuget/packages/",
-      "outputPath": "/home/dorll/Desktop/c#/FizzleMonogameTemplate/MonoGame.ImGuiNet/obj/",
+      "projectPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+      "packagesPath": "C:\\Users\\Nicholas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/dorll/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Nicholas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -316,6 +324,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -346,18 +359,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.7, 8.0.7]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

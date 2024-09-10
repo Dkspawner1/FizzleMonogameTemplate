@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
+using FizzleMonogameTemplate.DebugGUI.Attributes;
 
 namespace FizzleMonogameTemplate.DebugGUI
 {
@@ -8,29 +10,46 @@ namespace FizzleMonogameTemplate.DebugGUI
         public static List<DebugProperty> GetDebugProperties(object obj)
         {
             var properties = new List<DebugProperty>();
-            var members = obj.GetType().GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var type = obj.GetType();
+
+            var members = type.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             foreach (var member in members)
             {
-                if (member.GetCustomAttribute<DebugVariableAttribute>() != null)
+                var attribute = member.GetCustomAttribute<DebugVariableAttribute>();
+
+                if (attribute != null)
                 {
-                    if (member is PropertyInfo property)
+                    string name = member.Name;
+                    Type memberType = null;
+                    Func<object> getValue = null;
+                    Action<object> setValue = null;
+
+                    if (member is FieldInfo field)
                     {
-                        properties.Add(new DebugProperty(
-                            property.Name,
-                            property.PropertyType,
-                            () => property.GetValue(obj),
-                            value => property.SetValue(obj, value)
-                        ));
+                        memberType = field.FieldType;
+                        getValue = () => field.GetValue(obj);
+                        if (attribute.IsEditable)
+                        {
+                            setValue = newValue => field.SetValue(obj, newValue);
+                        }
                     }
-                    else if (member is FieldInfo field)
+                    else if (member is PropertyInfo property)
                     {
-                        properties.Add(new DebugProperty(
-                            field.Name,
-                            field.FieldType,
-                            () => field.GetValue(obj),
-                            value => field.SetValue(obj, value)
-                        ));
+                        if (property.CanRead)
+                        {
+                            memberType = property.PropertyType;
+                            getValue = () => property.GetValue(obj);
+                            if (attribute.IsEditable && property.CanWrite)
+                            {
+                                setValue = newValue => property.SetValue(obj, newValue);
+                            }
+                        }
+                    }
+
+                    if (memberType != null && getValue != null)
+                    {
+                        properties.Add(new DebugProperty(name, memberType, getValue, setValue));
                     }
                 }
             }

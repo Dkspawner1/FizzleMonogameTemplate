@@ -2,10 +2,9 @@
 using System.Diagnostics;
 using FizzleGame.Managers;
 using System;
-using FizzleMonogameTemplate.DebugGUI;
-using System.Collections.Generic;
 using FizzleMonogameTemplate.Services;
-using ImGuiNET;
+using FizzleMonogameTemplate.DebugGUI;
+using FizzleMonogameTemplate.DebugGUI.Attributes;
 
 namespace FizzleGame.Core;
 public class Game1 : Game, IDebuggable
@@ -17,11 +16,11 @@ public class Game1 : Game, IDebuggable
     private float gameSpeed = 1.0f;
     [DebugVariable]
     private bool debugMode = true;
-    [DebugVariable]
+    [DebugVariable(true)]
     private Vector2 playerPosition = new Vector2(100, 100);
-    [DebugVariable]
+    [DebugVariable(true)]
     private Color backgroundColor = Color.DeepPink;
-    
+
     public Game1()
     {
         var graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -88,8 +87,9 @@ public class Game1 : Game, IDebuggable
 
     protected override void Update(GameTime gameTime)
     {
-        if (Data.Window.Exit){
-                DebugGUI<Game1>.UnregisterDebuggable("Game");
+        if (Data.Window.Exit)
+        {
+            DebugGUI<Game1>.UnregisterDebuggable("Game");
             Exit();
         }
         sceneManager.Update(gameTime);
