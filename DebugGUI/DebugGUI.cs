@@ -5,14 +5,29 @@ using FizzleMonogameTemplate.Services;
 using ImGuiNET;
 using MonoGame.ImGuiNet;
 using ImGuiVector2 = System.Numerics.Vector2;
+using System.Collections.Generic;
 
 namespace FizzleMonogameTemplate.DebugGUI;
 
-public static class DebugGUI<Debuggable>
+public class DebugGUI<T> where T : IDebuggable
 {
-#pragma warning disable CS0436 // Type conflicts with imported type
+    private readonly T debuggable;
+    private Dictionary<Type, List<DebugProperty>> groupedProperties;
+
+    public DebugGUI(T debuggable)
+    {
+        this.debuggable = debuggable;
+        RefreshProperties();
+    }
+
+    private void RefreshProperties()
+    {
+        var allProperties = DebuggableHelper.GetDebugProperties(debuggable, true);
+        groupedProperties = allProperties.GroupBy(p => p.DeclaringType)
+                                         .ToDictionary(g => g.Key, g => g.ToList());
+    }
+
     public static ImGuiRenderer GuiRenderer { get; private set; }
-#pragma warning restore CS0436 // Type conflicts with imported type2
 
     private static readonly ConcurrentDictionary<string, IDebuggable> debuggableObjects = new();
 
@@ -31,7 +46,8 @@ public static class DebugGUI<Debuggable>
     }
 
     public static void LoadContent() => GuiRenderer.RebuildFontAtlas();
-public static void ToggleDebugWindow() => showDebugWindow = !showDebugWindow;
+    public static void ToggleDebugWindow() => showDebugWindow = !showDebugWindow;
+
     public static void RegisterDebuggable(string name, IDebuggable debuggable)
     {
         if (string.IsNullOrEmpty(name))
@@ -44,13 +60,12 @@ public static void ToggleDebugWindow() => showDebugWindow = !showDebugWindow;
 
     public static void UnregisterDebuggable(string name) => debuggableObjects.TryRemove(name, out _);
 
-    public static void Draw(in GameTime gameTime)
+    public static void Draw(GameTime gameTime)
     {
         ImGui.SetNextWindowSize(debugWindowSize, ImGuiCond.FirstUseEver);
         ImGui.SetNextWindowPos(debugWindowPosition, ImGuiCond.FirstUseEver);
         GuiRenderer.BeginLayout(gameTime);
 
-        // Add the menu bar
         if (ImGui.BeginMainMenuBar())
         {
             if (ImGui.BeginMenu("Debug"))
@@ -61,19 +76,36 @@ public static void ToggleDebugWindow() => showDebugWindow = !showDebugWindow;
             ImGui.EndMainMenuBar();
         }
 
-        // Only show the debug window if toggled on
         if (showDebugWindow)
         {
             ImGui.Begin("Debug Menu");
             ImGui.Text($"FPS: {1 / gameTime.ElapsedGameTime.TotalSeconds:F2}");
 
-            foreach (var debuggable in debuggableObjects)
-                if (ImGui.CollapsingHeader(debuggable.Key))
-                    DebugRenderer.RenderDebugProperties(debuggable.Value.GetDebugProperties());
+            foreach (var debuggablePair in debuggableObjects)
+            {
+                if (ImGui.CollapsingHeader(debuggablePair.Key))
+                {
+                    var debuggable = debuggablePair.Value;
+                    var debugGui = new DebugGUI<IDebuggable>(debuggable);
+                    debugGui.RenderGroupedProperties();
+                }
+            }
 
             ImGui.End();
         }
 
         GuiRenderer.EndLayout();
+    }
+
+    private void RenderGroupedProperties()
+    {
+        foreach (var group in groupedProperties)
+        {
+            if (ImGui.TreeNode(group.Key.Name))
+            {
+                DebugRenderer.RenderDebugProperties(group.Value);
+                ImGui.TreePop();
+            }
+        }
     }
 }
