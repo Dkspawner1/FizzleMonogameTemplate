@@ -1,8 +1,11 @@
 using FizzleGame.ECS.Systems;
+using FizzleMonogameTemplate.DebugGUI.Attributes;
 
 namespace FizzleGame.Scenes;
 public class GameScene : SceneBase
 {
+    [DebugVariable]
+    Vector2 test;
     public GameScene() : base([new RenderSystem()])
     {
 

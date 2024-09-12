@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using FizzleMonogameTemplate.DebugGUI;
 using MonoGame.Extended.ECS.Systems;
 
 namespace FizzleGame.Scenes;
 
-public abstract class SceneBase
+public abstract class SceneBase : IDebuggable
 {
     protected World world;
     public SceneBase([Optional] IEnumerable<ISystem> systems) => world =

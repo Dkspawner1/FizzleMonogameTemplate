@@ -5,6 +5,7 @@ using System;
 using FizzleMonogameTemplate.Services;
 using FizzleMonogameTemplate.DebugGUI;
 using FizzleMonogameTemplate.DebugGUI.Attributes;
+using FizzleGame.Scenes;
 
 namespace FizzleGame.Core;
 public class Game1 : Game, IDebuggable
@@ -121,7 +122,6 @@ public class Game1 : Game, IDebuggable
         spriteBatch.End();
 
         DebugGUI<Game1>.Draw(gameTime);
-
 
         base.Draw(gameTime);
     }
