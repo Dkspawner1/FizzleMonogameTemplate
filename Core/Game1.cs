@@ -6,6 +6,8 @@ using FizzleMonogameTemplate.Services;
 using FizzleMonogameTemplate.DebugGUI;
 using FizzleMonogameTemplate.DebugGUI.Attributes;
 using FizzleGame.Scenes;
+using FizzleMonogameTemplate.Managers;
+using FizzleMonogameTemplate.Core;
 
 namespace FizzleGame.Core;
 public class Game1 : Game, IDebuggable
@@ -21,7 +23,6 @@ public class Game1 : Game, IDebuggable
     private Vector2 playerPosition = new Vector2(100, 100);
     [DebugVariable(true)]
     private Color backgroundColor = Color.DeepPink;
-
     public Game1()
     {
         var graphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -65,6 +66,9 @@ public class Game1 : Game, IDebuggable
             DebugGUI<Game1>.Initialize();
             DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
+            TransitionManager.Instance.Initialize();
+            ServiceLocator.GetService<SceneManager>().ChangeState(new MenuScene());
+
             base.Initialize();
         }
         catch (Exception ex)
@@ -83,17 +87,21 @@ public class Game1 : Game, IDebuggable
         sceneManager.LoadContent();
 
         DebugGUI<Game1>.LoadContent();
-
     }
 
     protected override void Update(GameTime gameTime)
     {
+        TransitionManager.Instance.Update(in gameTime);
+
         if (Data.Window.Exit)
         {
             DebugGUI<Game1>.UnregisterDebuggable("Game");
             Exit();
         }
         sceneManager.Update(gameTime);
+
+
+        ServiceLocator.GetService<GameTime>();
 
         // Use gameSpeed to adjust update speed
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds * gameSpeed;
@@ -118,6 +126,7 @@ public class Game1 : Game, IDebuggable
         // Draw a rectangle representing the player
         var spriteBatch = ServiceLocator.GetService<SpriteBatch>();
         spriteBatch.Begin();
+        TransitionManager.Instance.Draw();
         spriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
         spriteBatch.End();
 

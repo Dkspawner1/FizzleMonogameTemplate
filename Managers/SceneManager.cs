@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FizzleGame.Scenes;
+using FizzleMonogameTemplate.Managers;
 
 namespace FizzleGame.Managers;
 
@@ -37,4 +38,15 @@ public class SceneManager
     {
         currentScene?.Draw(gameTime);
     }
+
+
+    public void ChangeState(SceneBase newScene)
+    {
+        TransitionManager.Instance.StartTransition(() =>
+        {
+            currentScene = newScene;
+            currentScene.LoadContent();
+        });
+    }
+
 }
