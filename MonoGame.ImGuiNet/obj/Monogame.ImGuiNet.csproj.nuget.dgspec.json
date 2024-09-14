@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {}
+    "c:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {
+    "c:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj": {
       "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+        "projectUniqueName": "c:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
         "projectName": "MonoGame.ImGuiNet",
-        "projectPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
+        "projectPath": "c:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\Monogame.ImGuiNet.csproj",
         "packagesPath": "C:\\Users\\Nicholas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\obj\\",
+        "outputPath": "c:\\Users\\Nicholas\\Desktop\\C#\\FizzleMonogameTemplate\\MonoGame.ImGuiNet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

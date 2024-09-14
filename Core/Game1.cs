@@ -1,19 +1,13 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
-using FizzleGame.Managers;
-using FizzleGame.Scenes;
 using FizzleMonogameTemplate.DebugGUI;
 using FizzleMonogameTemplate.DebugGUI.Attributes;
-using System;
-using MonoGame.Extended.Screens.Transitions;
+using FizzleGame.Scenes;
 
 namespace FizzleGame.Core;
 
 public class Game1 : Game, IDebuggable
 {
-    private SceneManager sceneManager;
+    // private SceneManager sceneManager;
     private readonly ScreenManager screenManager;
     private GraphicsDeviceManager graphics;
     private SpriteBatch spriteBatch;
@@ -55,8 +49,6 @@ public class Game1 : Game, IDebuggable
 
         spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        sceneManager = new SceneManager(this, screenManager);
-        sceneManager.Initialize();
 
         DebugGUI<Game1>.Initialize(this);
         DebugGUI<Game1>.RegisterDebuggable("Game", this);
@@ -71,10 +63,7 @@ public class Game1 : Game, IDebuggable
         pixel = new Texture2D(GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
 
-        sceneManager.LoadContent();
-
-        sceneManager.ChangeScene(SCENES.MENU, new FadeTransition(GraphicsDevice, Color.Black));
-        sceneManager.ChangeScene(SCENES.MENU);
+        screenManager.LoadScreen(new MenuScene(this));
 
         DebugGUI<Game1>.LoadContent();
     }
