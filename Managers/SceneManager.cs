@@ -1,34 +1,43 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using FizzleGame.Scenes;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 
 namespace FizzleGame.Managers;
 
-public class SceneManager
+public class SceneManager(Game1 game, ScreenManager screenManager)
 {
-    private readonly Game1 game;
-    private readonly ScreenManager screenManager;
-    private readonly Dictionary<SCENES, SceneBase> scenes;
-    public SceneManager(Game1 game, ScreenManager screenManager)
+    private readonly Game1 game = game;
+    private readonly ScreenManager screenManager = screenManager;
+    public SceneBase CurrentScene { get; private set; }
+
+    public void ChangeScene(SCENES sceneType)
     {
-        this.game = game;
-        this.screenManager = screenManager;
+        SceneBase newScene = CreateScene(sceneType);
+        Transition transition = CreateTransition();
+        screenManager.LoadScreen(newScene, transition);
+        CurrentScene = newScene;
     }
-    public void ChangeScene(SCENES sceneType, Transition transition = null)
+    public SCENES GetCurrentSceneType()
     {
-        SceneBase newScene = sceneType switch
+        return CurrentScene switch
+        {
+            MenuScene => SCENES.MENU,
+            GameScene => SCENES.GAME,
+            _ => throw new InvalidOperationException("Unknown scene type")
+        };
+    }
+    private SceneBase CreateScene(SCENES sceneType)
+    {
+        return sceneType switch
         {
             SCENES.MENU => new MenuScene(game, this),
             SCENES.GAME => new GameScene(game, this),
             _ => throw new ArgumentException("Invalid scene type", nameof(sceneType))
         };
-
-        if (transition != null)
-            screenManager.LoadScreen(newScene, transition);
-        else
-            screenManager.LoadScreen(newScene);
+    }
+    private Transition CreateTransition()
+    {
+        return new FadeTransition(game.GraphicsDevice, Color.Black, 5f);
     }
 }

@@ -23,4 +23,8 @@ public class MenuScene : SceneBase
         base.Draw(gameTime);
     }
 
+    public override void DrawDebugInfo(SpriteBatch spriteBatch, SpriteFont spriteFont)
+    {
+        throw new System.NotImplementedException();
+    }
 }

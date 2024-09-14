@@ -56,7 +56,7 @@ public class Game1 : Game, IDebuggable
         DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
         sceneManager = new(this, screenManager);
-
+        sceneManager.ChangeScene(SCENES.GAME);
         base.Initialize();
     }
 
@@ -66,8 +66,6 @@ public class Game1 : Game, IDebuggable
 
         pixel = new Texture2D(GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
-
-        sceneManager.ChangeScene(SCENES.MENU, new FadeTransition(GraphicsDevice, Color.Black, 5f));
 
         DebugGUI<Game1>.LoadContent();
     }

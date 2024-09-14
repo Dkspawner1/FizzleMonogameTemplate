@@ -9,23 +9,37 @@ public class GameScene : SceneBase
 {
     [DebugVariable]
     Vector2 test;
-    private readonly Game1 game;
 
-    public GameScene(Game1 game, SceneManager sceneManager) : base(game, sceneManager, [spriteBatch => new RenderSystem(spriteBatch),])
+    public GameScene(Game1 game, SceneManager sceneManager)
+       : base(game, sceneManager, [spriteBatch => new RenderSystem(spriteBatch),])
     {
     }
     public override void Initialize()
     {
+        base.Initialize();
     }
     public override void LoadContent()
     {
+        base.LoadContent();
     }
-    public override void Update(GameTime gameTime)
+    protected override void UpdateScene(GameTime gameTime)
     {
-        base.Update(gameTime);
+        // Add game-specific update logic here
+        // This will only be called after the fade-in transition is complete
     }
-    public override void Draw(GameTime gameTime)
+
+    protected override void DrawScene(GameTime gameTime)
     {
-        base.Draw(gameTime);
+        // Add game-specific drawing logic here
+        // This will only be called after the fade-in transition is complete
     }
+
+
+    public override void DrawDebugInfo(SpriteBatch spriteBatch, SpriteFont spriteFont)
+    {
+        // Implement your debug drawing logic here
+        // For example:
+        spriteBatch.DrawString(spriteFont, $"Test Vector: {test}", new Vector2(10, 10), Color.White);
+    }
+
 }
