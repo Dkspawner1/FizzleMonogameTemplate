@@ -1,5 +1,6 @@
 using System;
 using FizzleGame.ECS.Systems;
+using FizzleGame.Managers;
 using FizzleMonogameTemplate.DebugGUI.Attributes;
 using MonoGame.Extended.ECS.Systems;
 
@@ -10,7 +11,7 @@ public class GameScene : SceneBase
     Vector2 test;
     private readonly Game1 game;
 
-    public GameScene(Game1 game) : base(game, [spriteBatch => new RenderSystem(spriteBatch),])
+    public GameScene(Game1 game, SceneManager sceneManager) : base(game, sceneManager, [spriteBatch => new RenderSystem(spriteBatch),])
     {
     }
     public override void Initialize()

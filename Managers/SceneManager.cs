@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FizzleGame.Scenes;
@@ -15,36 +16,19 @@ public class SceneManager
     {
         this.game = game;
         this.screenManager = screenManager;
-        scenes = new()
-        {
-            { SCENES.MENU, new MenuScene(game) },
-            { SCENES.GAME, new GameScene(game) }
-        };
-    }
-
-    public void Initialize()
-    {
-        foreach (var scene in scenes.Values)
-            scene.Initialize();
-    }
-    public void LoadContent()
-    {
-        foreach (var scene in scenes.Values)
-            scene.LoadContent();
     }
     public void ChangeScene(SCENES sceneType, Transition transition = null)
     {
-
-        if (scenes.TryGetValue(sceneType, out var newScene))
+        SceneBase newScene = sceneType switch
         {
+            SCENES.MENU => new MenuScene(game, this),
+            SCENES.GAME => new GameScene(game, this),
+            _ => throw new ArgumentException("Invalid scene type", nameof(sceneType))
+        };
 
-            if (transition is not null)
-                screenManager.LoadScreen(newScene, transition);
-            else
-                screenManager.LoadScreen(newScene);
-
-        }
-
+        if (transition != null)
+            screenManager.LoadScreen(newScene, transition);
+        else
+            screenManager.LoadScreen(newScene);
     }
-
 }

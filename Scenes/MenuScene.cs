@@ -1,8 +1,10 @@
+using FizzleGame.Managers;
+
 namespace FizzleGame.Scenes;
 
 public class MenuScene : SceneBase
 {
-    public MenuScene(Game1 game) : base(game, [])
+    public MenuScene(Game1 game, SceneManager sceneManager) : base(game, sceneManager, [])
     {
 
     }
