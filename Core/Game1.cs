@@ -4,6 +4,7 @@ using FizzleMonogameTemplate.DebugGUI.Attributes;
 using FizzleGame.Scenes;
 using FizzleGame.Managers;
 using MonoGame.Extended.Screens.Transitions;
+using FizzleMonogameTemplate.Managers;
 
 namespace FizzleGame.Core;
 
@@ -13,8 +14,8 @@ public class Game1 : Game, IDebuggable
     private readonly ScreenManager screenManager;
     private SpriteBatch spriteBatch;
     private Texture2D pixel;
+    private TransitionManager transitionManager;
 
-    private bool isInitialLoad = true;
 
 
     [DebugVariable(true)]
@@ -24,7 +25,7 @@ public class Game1 : Game, IDebuggable
     [DebugVariable(true)]
     private Vector2 playerPosition = new(100, 100);
     [DebugVariable(true)]
-    private Color backgroundColor = Color.Black;
+    private Color backgroundColor = Color.DeepPink;
 
     public Game1()
     {
@@ -46,15 +47,17 @@ public class Game1 : Game, IDebuggable
         Components.Add(screenManager);
     }
 
-
-
     protected override void Initialize()
     {
 
         DebugGUI<Game1>.Initialize(this);
         DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
+        transitionManager = new(this);
+        transitionManager.TargetBackgroundColor = backgroundColor;
+
         sceneManager = new(this, screenManager);
+        sceneManager.ChangeScene(SCENES.GAME);
         base.Initialize();
     }
 
@@ -75,17 +78,14 @@ public class Game1 : Game, IDebuggable
             DebugGUI<Game1>.UnregisterDebuggable("Game");
             Exit();
         }
-        if (isInitialLoad)
-        {
-            sceneManager.ChangeScene(SCENES.GAME);
-            isInitialLoad = false;
-        }
-        else
+        transitionManager.Update(gameTime);
+
+
+        if (!transitionManager.IsTransitioning())
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds * gameSpeed;
             UpdatePlayerPosition(deltaTime);
         }
-
 
         base.Update(gameTime);
     }
@@ -101,9 +101,9 @@ public class Game1 : Game, IDebuggable
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(backgroundColor);
+        transitionManager.Draw(spriteBatch);
 
-        if (!isInitialLoad)
+        if (!transitionManager.IsTransitioning())
         {
             spriteBatch.Begin();
             spriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
@@ -113,4 +113,5 @@ public class Game1 : Game, IDebuggable
         }
         base.Draw(gameTime);
     }
+    public void SetTransitionState(bool transitioning) => transitionManager.SetTransitionState(transitioning);
 }
