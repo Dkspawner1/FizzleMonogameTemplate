@@ -18,9 +18,7 @@ public abstract class SceneBase(Game1 game, SceneManager sceneManager, [Optional
     private readonly List<Func<SpriteBatch, ISystem>> pendingSystems = systems?.ToList() ?? new List<Func<SpriteBatch, ISystem>>();
     protected WorldBuilder worldBuilder = new WorldBuilder();
     protected SceneManager SceneManager { get; } = sceneManager;
-    private bool contentReady = false;
-    private FadeTransition fadeInTransition;
-
+    protected bool ContentReady { get; set; } = false;
     private bool disposedValue;
 
     public override void Initialize()
@@ -33,9 +31,7 @@ public abstract class SceneBase(Game1 game, SceneManager sceneManager, [Optional
         SpriteBatch = new SpriteBatch(Game.GraphicsDevice);
         InitializeSystems();
         world = worldBuilder.Build();
-
-        fadeInTransition = new FadeTransition(Game.GraphicsDevice, Color.Black, 3.5f);
-        fadeInTransition.Completed += (s, e) => contentReady = true;
+        ContentReady = true;
     }
     private void InitializeSystems()
     {
@@ -49,11 +45,7 @@ public abstract class SceneBase(Game1 game, SceneManager sceneManager, [Optional
 
     public override void Update(GameTime gameTime)
     {
-        if (!contentReady)
-        {
-            fadeInTransition.Update(gameTime);
-        }
-        else
+        if (ContentReady)
         {
             world?.Update(gameTime);
             UpdateScene(gameTime);
@@ -61,15 +53,11 @@ public abstract class SceneBase(Game1 game, SceneManager sceneManager, [Optional
     }
     public override void Draw(GameTime gameTime)
     {
-        if (contentReady)
+        if (ContentReady)
         {
             world?.Draw(gameTime);
             DrawScene(gameTime);
         }
-
-        SpriteBatch.Begin();
-        fadeInTransition.Draw(gameTime);
-        SpriteBatch.End();
     }
 
     protected virtual void UpdateScene(GameTime gameTime) { }
@@ -87,12 +75,10 @@ public abstract class SceneBase(Game1 game, SceneManager sceneManager, [Optional
             {
                 SpriteBatch?.Dispose();
                 (world as IDisposable)?.Dispose();
-                fadeInTransition?.Dispose();
             }
 
             world = null;
             SpriteBatch = null;
-            fadeInTransition = null;
 
             disposedValue = true;
         }
@@ -102,6 +88,7 @@ public abstract class SceneBase(Game1 game, SceneManager sceneManager, [Optional
         Dispose(disposing: false);
     }
 
+    // Do not change
     public override void Dispose()
     {
         Dispose(disposing: true);

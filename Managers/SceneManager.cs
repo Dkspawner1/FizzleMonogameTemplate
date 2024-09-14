@@ -18,26 +18,18 @@ public class SceneManager(Game1 game, ScreenManager screenManager)
         screenManager.LoadScreen(newScene, transition);
         CurrentScene = newScene;
     }
-    public SCENES GetCurrentSceneType()
+    public SCENES GetCurrentSceneType() => CurrentScene switch
     {
-        return CurrentScene switch
-        {
-            MenuScene => SCENES.MENU,
-            GameScene => SCENES.GAME,
-            _ => throw new InvalidOperationException("Unknown scene type")
-        };
-    }
-    private SceneBase CreateScene(SCENES sceneType)
+        MenuScene => SCENES.MENU,
+        GameScene => SCENES.GAME,
+        _ => throw new InvalidOperationException("Unknown scene type")
+    };
+
+    private SceneBase CreateScene(SCENES sceneType) => sceneType switch
     {
-        return sceneType switch
-        {
-            SCENES.MENU => new MenuScene(game, this),
-            SCENES.GAME => new GameScene(game, this),
-            _ => throw new ArgumentException("Invalid scene type", nameof(sceneType))
-        };
-    }
-    private Transition CreateTransition()
-    {
-        return new FadeTransition(game.GraphicsDevice, Color.Black, 5f);
-    }
+        SCENES.MENU => new MenuScene(game, this),
+        SCENES.GAME => new GameScene(game, this),
+        _ => throw new ArgumentException("Invalid scene type", nameof(sceneType))
+    };
+    private Transition CreateTransition() => new FadeTransition(game.GraphicsDevice, Color.Black, 5f);
 }
