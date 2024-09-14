@@ -11,22 +11,24 @@ public class Game1 : Game, IDebuggable
 {
     private SceneManager sceneManager;
     private readonly ScreenManager screenManager;
-    private GraphicsDeviceManager graphics;
     private SpriteBatch spriteBatch;
     private Texture2D pixel;
 
+    private bool isInitialLoad = true;
+
+
     [DebugVariable(true)]
-    private float gameSpeed = 1.0f;
+    private float gameSpeed = 1.5f;
     [DebugVariable]
     private bool debugMode = true;
     [DebugVariable(true)]
     private Vector2 playerPosition = new(100, 100);
     [DebugVariable(true)]
-    private Color backgroundColor = Color.DeepPink;
+    private Color backgroundColor = Color.Black;
 
     public Game1()
     {
-        graphics = new GraphicsDeviceManager(this)
+        _ = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = Data.Window.Width,
             PreferredBackBufferHeight = Data.Window.Height,
@@ -49,14 +51,10 @@ public class Game1 : Game, IDebuggable
     protected override void Initialize()
     {
 
-        spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
         DebugGUI<Game1>.Initialize(this);
         DebugGUI<Game1>.RegisterDebuggable("Game", this);
 
         sceneManager = new(this, screenManager);
-        sceneManager.ChangeScene(SCENES.GAME);
         base.Initialize();
     }
 
@@ -77,10 +75,17 @@ public class Game1 : Game, IDebuggable
             DebugGUI<Game1>.UnregisterDebuggable("Game");
             Exit();
         }
+        if (isInitialLoad)
+        {
+            sceneManager.ChangeScene(SCENES.GAME);
+            isInitialLoad = false;
+        }
+        else
+        {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds * gameSpeed;
+            UpdatePlayerPosition(deltaTime);
+        }
 
-        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds * gameSpeed;
-
-        UpdatePlayerPosition(deltaTime);
 
         base.Update(gameTime);
     }
@@ -98,12 +103,14 @@ public class Game1 : Game, IDebuggable
     {
         GraphicsDevice.Clear(backgroundColor);
 
-        spriteBatch.Begin();
-        spriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
-        spriteBatch.End();
+        if (!isInitialLoad)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
+            spriteBatch.End();
 
-        DebugGUI<Game1>.Draw(gameTime);
-
+            DebugGUI<Game1>.Draw(gameTime);
+        }
         base.Draw(gameTime);
     }
 }

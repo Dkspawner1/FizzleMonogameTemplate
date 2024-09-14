@@ -10,14 +10,22 @@ public class SceneManager(Game1 game, ScreenManager screenManager)
 {
     private readonly Game1 game = game;
     private readonly ScreenManager screenManager = screenManager;
+    private bool isFirstScene = true;
+
     public SceneBase CurrentScene { get; private set; }
 
     public void ChangeScene(SCENES sceneType)
     {
         SceneBase newScene = CreateScene(sceneType);
+        if (isFirstScene)
+        {
+            var transition = new FadeOutInTransition(game.GraphicsDevice, Color.Black, 1f);
+            screenManager.LoadScreen(newScene, transition);
+            isFirstScene = false;
+        }
+        else
+            screenManager.LoadScreen(newScene);
 
-        var transition = new FadeOutInTransition(game.GraphicsDevice, Color.Black, 5f);
-        screenManager.LoadScreen(newScene, transition);
         CurrentScene = newScene;
     }
     public SCENES GetCurrentSceneType() => CurrentScene switch

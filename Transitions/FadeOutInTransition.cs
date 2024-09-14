@@ -15,9 +15,7 @@ namespace FizzleMonogameTemplate.Transitions
 
         public override void Draw(GameTime gameTime)
         {
-            float alpha = State == TransitionState.Out
-               ? Value  // Fade out: 0 to 1
-               : 1 - Value;  // Fade in: 1 to 0
+            float alpha = 1 - Value;
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             spriteBatch.FillRectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, color * alpha);
