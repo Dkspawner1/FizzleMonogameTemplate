@@ -1,5 +1,6 @@
 using System;
 using FizzleGame.Scenes;
+using FizzleMonogameTemplate.Transitions;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 
@@ -14,7 +15,8 @@ public class SceneManager(Game1 game, ScreenManager screenManager)
     public void ChangeScene(SCENES sceneType)
     {
         SceneBase newScene = CreateScene(sceneType);
-        Transition transition = CreateTransition();
+
+        var transition = new FadeOutInTransition(game.GraphicsDevice, Color.Black, 5f);
         screenManager.LoadScreen(newScene, transition);
         CurrentScene = newScene;
     }
@@ -31,5 +33,4 @@ public class SceneManager(Game1 game, ScreenManager screenManager)
         SCENES.GAME => new GameScene(game, this),
         _ => throw new ArgumentException("Invalid scene type", nameof(sceneType))
     };
-    private Transition CreateTransition() => new FadeTransition(game.GraphicsDevice, Color.Black, 5f);
 }
