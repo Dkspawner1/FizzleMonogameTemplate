@@ -1,89 +1,82 @@
-
-using System.Diagnostics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Screens;
 using FizzleGame.Managers;
-using System;
-using FizzleMonogameTemplate.Services;
+using FizzleGame.Scenes;
 using FizzleMonogameTemplate.DebugGUI;
 using FizzleMonogameTemplate.DebugGUI.Attributes;
-using FizzleGame.Scenes;
+using System;
+using MonoGame.Extended.Screens.Transitions;
 
 namespace FizzleGame.Core;
+
 public class Game1 : Game, IDebuggable
 {
-    private readonly SceneManager sceneManager;
+    private SceneManager sceneManager;
+    private readonly ScreenManager screenManager;
+    private GraphicsDeviceManager graphics;
+    private SpriteBatch spriteBatch;
+    private Texture2D pixel;
 
-    // Test debug variables
     [DebugVariable(true)]
     private float gameSpeed = 1.0f;
     [DebugVariable]
     private bool debugMode = true;
     [DebugVariable(true)]
-    private Vector2 playerPosition = new Vector2(100, 100);
+    private Vector2 playerPosition = new(100, 100);
     [DebugVariable(true)]
     private Color backgroundColor = Color.DeepPink;
 
     public Game1()
     {
-        var graphicsDeviceManager = new GraphicsDeviceManager(this)
+        graphics = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = Data.Window.Width,
             PreferredBackBufferHeight = Data.Window.Height,
             SynchronizeWithVerticalRetrace = true,
         };
+        Content.RootDirectory = "Content";
+        IsMouseVisible = true;
         IsFixedTimeStep = true;
-
-        ServiceLocator.RegisterService(graphicsDeviceManager);
 
         Window.Title = Data.Window.Title;
         Window.AllowUserResizing = true;
         Window.AllowAltF4 = true;
-        Window.ClientSizeChanged += WindowClientSizeChanged;
 
-        Content.RootDirectory = "Content";
-        IsMouseVisible = true;
-
-        sceneManager = new();
+        screenManager = new ScreenManager();
+        Components.Add(screenManager);
     }
 
-    private void WindowClientSizeChanged(object sender, EventArgs e)
-    {
-        ScreenManager.UpdateScreenSize(ServiceLocator.GetService<GraphicsDevice>());
-        Trace.WriteLine($"Screen's new size: {GraphicsDevice.Viewport.Bounds} Updated to ScreenManager: {ScreenManager.ScreenSize}");
-    }
+
+
     protected override void Initialize()
     {
-        try
-        {
-            ServiceLocator.RegisterService(GraphicsDevice);
-            ServiceLocator.RegisterService(Content);
-            ServiceLocator.RegisterService(new SpriteBatch(GraphicsDevice));
-            ServiceLocator.RegisterService(sceneManager);
-            ServiceLocator.RegisterService(this);
 
-            ScreenManager.Initialize(GraphicsDevice);
-            sceneManager.Initialize();
-            DebugGUI<Game1>.Initialize();
-            DebugGUI<Game1>.RegisterDebuggable("Game", this);
+        spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            base.Initialize();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error during initialization: {ex.Message}");
-            throw;
-        }
+        sceneManager = new SceneManager(this, screenManager);
+        sceneManager.Initialize();
+
+        DebugGUI<Game1>.Initialize(this);
+        DebugGUI<Game1>.RegisterDebuggable("Game", this);
+
+        base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        // Create a 1x1 white texture for drawing shapes
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+
         pixel = new Texture2D(GraphicsDevice, 1, 1);
         pixel.SetData(new[] { Color.White });
 
         sceneManager.LoadContent();
 
-        DebugGUI<Game1>.LoadContent();
+        sceneManager.ChangeScene(SCENES.MENU, new FadeTransition(GraphicsDevice, Color.Black));
+        sceneManager.ChangeScene(SCENES.MENU);
 
+        DebugGUI<Game1>.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
@@ -93,30 +86,27 @@ public class Game1 : Game, IDebuggable
             DebugGUI<Game1>.UnregisterDebuggable("Game");
             Exit();
         }
-        sceneManager.Update(gameTime);
 
-        // Use gameSpeed to adjust update speed
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds * gameSpeed;
 
-        // Update player position (example)
+        UpdatePlayerPosition(deltaTime);
+
+        base.Update(gameTime);
+    }
+
+    private void UpdatePlayerPosition(float deltaTime)
+    {
         KeyboardState keyState = Keyboard.GetState();
         if (keyState.IsKeyDown(Keys.W)) playerPosition.Y -= 100 * deltaTime;
         if (keyState.IsKeyDown(Keys.S)) playerPosition.Y += 100 * deltaTime;
         if (keyState.IsKeyDown(Keys.A)) playerPosition.X -= 100 * deltaTime;
         if (keyState.IsKeyDown(Keys.D)) playerPosition.X += 100 * deltaTime;
-
-
-        base.Update(gameTime);
     }
-    private Texture2D pixel;
+
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(backgroundColor);
 
-        sceneManager.Draw(gameTime);
-
-        // Draw a rectangle representing the player
-        var spriteBatch = ServiceLocator.GetService<SpriteBatch>();
         spriteBatch.Begin();
         spriteBatch.Draw(pixel, new Rectangle((int)playerPosition.X, (int)playerPosition.Y, 32, 32), Color.Red);
         spriteBatch.End();

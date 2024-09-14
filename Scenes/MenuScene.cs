@@ -2,7 +2,7 @@ namespace FizzleGame.Scenes;
 
 public class MenuScene : SceneBase
 {
-    public MenuScene() : base([])
+    public MenuScene(Game1 game) : base(game, [])
     {
 
     }

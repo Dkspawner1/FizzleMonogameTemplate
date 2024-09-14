@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Collections.Concurrent;
-using FizzleMonogameTemplate.Services;
 using ImGuiNET;
 using MonoGame.ImGuiNet;
 using ImGuiVector2 = System.Numerics.Vector2;
@@ -38,11 +37,11 @@ public class DebugGUI<T> where T : IDebuggable
 
     private static bool showDebugWindow = true;
 
-    public static void Initialize()
+    public static void Initialize(Game1 game)
     {
         if (GuiRenderer != null)
             throw new InvalidOperationException("DebugGUI has already been initialized.");
-        GuiRenderer = new(ServiceLocator.GetService<Game1>());
+        GuiRenderer = new(game);
     }
 
     public static void LoadContent() => GuiRenderer.RebuildFontAtlas();
